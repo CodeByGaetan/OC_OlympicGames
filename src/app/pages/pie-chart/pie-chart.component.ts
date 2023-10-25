@@ -26,7 +26,7 @@ export class PieChartComponent implements OnInit {
       "value": 6200000
     }
   ];
-  view: [number, number] = [700, 400];
+  view: [number, number] = [1000, 500];
 
   // options
   gradient: boolean = false;
@@ -34,7 +34,6 @@ export class PieChartComponent implements OnInit {
   showLabels: boolean = true;
   isDoughnut: boolean = false;
   legendPosition: LegendPosition = LegendPosition.Below ;
-
   colorScheme = {
     domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
   };
@@ -46,10 +45,12 @@ export class PieChartComponent implements OnInit {
 
   onSelect(data: string): void {
     // console.log('Item clicked', JSON.parse(JSON.stringify(data)));
+    console.log("on Select Gagou")
   }
 
   onActivate(data: string): void {
     // console.log('Activate', JSON.parse(JSON.stringify(data)));
+    
   }
 
   onDeactivate(data: string): void {
