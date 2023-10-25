@@ -1,0 +1,6 @@
+<header>
+    <h1 class="titleClass">{{ title }}</h1>
+    <div class="statsClass">
+        <h2 *ngFor="let statistic of statistics">{{ statistic.statName }}<br>{{ statistic.value }}</h2>
+    </div>
+</header>
