@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, of, tap } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { Olympic } from 'src/app/core/models/olympic.model';
 import { Statistic } from 'src/app/core/models/statistic.model';
 import { OlympicService } from 'src/app/core/services/olympic.service';
@@ -10,6 +10,7 @@ import { OlympicService } from 'src/app/core/services/olympic.service';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
+  
   public olympics$!: Observable<Olympic[]>;
   
   title!: string;

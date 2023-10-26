@@ -1,5 +1,6 @@
 <div class="line">
     <ngx-charts-line-chart
+    [results]="dataSet$ | async"
     [view]="view"
     [legend]="legend"
     [showXAxisLabel]="showXAxisLabel"
@@ -9,7 +10,6 @@
     [xAxisLabel]="xAxisLabel"
     [yAxisLabel]="yAxisLabel"
     [timeline]="timeline"
-    [results]="dataSet"
     >
   </ngx-charts-line-chart>
 </div>

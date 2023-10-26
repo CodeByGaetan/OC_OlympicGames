@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { DataItem } from '@swimlane/ngx-charts';
-import { Observable } from 'rxjs';
+import { Component, Input, OnInit } from '@angular/core';
+import { Series } from '@swimlane/ngx-charts';
+import { Observable, map } from 'rxjs';
+import { Olympic } from 'src/app/core/models/olympic.model';
 
 @Component({
   selector: 'app-line-chart',
@@ -9,24 +10,31 @@ import { Observable } from 'rxjs';
 })
 export class LineChartComponent implements OnInit {
 
-  dataSet!: Observable<DataItem[]>;
-  view: [number, number] = [700, 300];
+  @Input() olympic$!: Observable<Olympic>;
+  dataSet$!: Observable<Series[]>;
 
   // options
+  view: [number, number] = [700, 300];
   legend: boolean = false;
-  showLabels: boolean = true;
+  showLabels: boolean = false;
   animations: boolean = false;
   xAxis: boolean = true;
   yAxis: boolean = true;
   showYAxisLabel: boolean = true;
   showXAxisLabel: boolean = true;
   xAxisLabel: string = 'Dates';
-  yAxisLabel: string = 'Medal number';
-  timeline: boolean = true;
-
-  constructor() { }
+  yAxisLabel: string = 'Number of Medals';
+  timeline: boolean = false;
 
   ngOnInit(): void {
+    this.dataSet$ = this.olympic$.pipe(
+      map(olympicItem => [
+        {
+          name : olympicItem.country,
+          series: olympicItem.participations.map(item => ({name:item.year,value:item.medalsCount}))
+        }]
+      )
+    )
   }
 
 }

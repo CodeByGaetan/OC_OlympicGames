@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { catchError, map, tap } from 'rxjs/operators';
 import { Olympic } from '../models/olympic.model';
 
 @Injectable({
@@ -11,9 +11,9 @@ export class OlympicService {
   private olympicUrl = './assets/mock/olympic.json';
   private olympics$ = new BehaviorSubject<Olympic[]>([]);
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-  loadInitialData() {
+  loadInitialData(): Observable<Olympic[]> {
     return this.http.get<Olympic[]>(this.olympicUrl).pipe(
       tap((value) => this.olympics$.next(value)),
       catchError((error, caught) => {
@@ -28,7 +28,38 @@ export class OlympicService {
     );
   }
 
-  getOlympics() {
+  getOlympics(): Observable<Olympic[]> {
     return this.olympics$.asObservable();
   }
+
+  // getOlympicById(id: number): Observable<Olympic> {
+  //   return this.olympics$.pipe(
+  //     map(items => {
+  //       const foundItem = items.find(item => item.id === id);
+  //       const emptyOlympic: Olympic = {
+  //         id: 0,
+  //         country: '',
+  //         participations: []
+  //       }
+
+  //       return foundItem ? foundItem : emptyOlympic;
+  //     })
+  //   )
+  // }
+
+  getOlympicByName(countryName: string): Observable<Olympic> {
+    return this.olympics$.pipe(
+      map(items => {
+        const foundItem = items.find(item => item.country === countryName);
+        const emptyOlympic: Olympic = {
+          id: 0,
+          country: 'Not Found',
+          participations: []
+        }
+
+        return foundItem ? foundItem : emptyOlympic;
+      })
+    )
+  }
+
 }
