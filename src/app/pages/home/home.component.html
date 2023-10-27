@@ -1,3 +1,8 @@
-<app-header [title]="title" [statistics]="statistics"></app-header>
-<app-pie-chart [olympics$]="olympics$"></app-pie-chart>
-<!-- <p *ngFor="let olympic of olympics$ | async ">{{ olympic.country }}</p> -->
+<div class="homeContainer">
+    <div class="headerContainer">
+        <app-header [title]="title" [statistics]="statistics"></app-header>
+    </div>
+    <div class="chartContainer">
+        <app-pie-chart [olympics$]="olympics$"></app-pie-chart>
+    </div>
+</div>

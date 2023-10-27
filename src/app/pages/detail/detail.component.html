@@ -1,3 +1,9 @@
-<app-header [title]="title" [statistics]="statistics"></app-header>
-<app-line-chart [olympic$]="olympic$"></app-line-chart>
-<a routerLink="">Back</a>
+<div class="detailContainer">
+    <div class="headerContainer">
+        <a routerLink="" class="material-symbols-outlined">arrow_circle_left</a>
+        <app-header [title]="title" [statistics]="statistics"></app-header>
+    </div>
+    <div class="chartContainer">
+        <app-line-chart [olympic$]="olympic$"></app-line-chart>
+    </div>
+</div>

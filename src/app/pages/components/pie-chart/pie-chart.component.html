@@ -1,17 +1,14 @@
-<div class="pie">
-  <ngx-charts-pie-chart
-  [results]="dataSet$ | async"
-  [gradient]="gradient"
-  [legend]="showLegend"
-  [legendPosition]="legendPosition"
-  [labels]="showLabels"
-  [doughnut]="isDoughnut"
-  (select)="onSelect($event)"
-  [animations]="animations"
-  [maxLabelLength]="20">
-    <ng-template #tooltipTemplate let-model="model">
-      <h2>{{model.name}}</h2>
-      <h2>🏅{{model.value}}</h2>
-    </ng-template>
-  </ngx-charts-pie-chart>
-</div>
+<ngx-charts-pie-chart
+[results]="dataSet$ | async"
+[gradient]="false"
+[legend]="false"
+[labels]="true"
+[doughnut]="false"
+(select)="onSelect($event)"
+[animations]="false"
+[maxLabelLength]="20">
+  <ng-template #tooltipTemplate let-model="model">
+    <h2>{{model.name}}</h2>
+    <h2>🏅{{model.value}}</h2>
+  </ng-template>
+</ngx-charts-pie-chart>

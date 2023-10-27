@@ -4,7 +4,11 @@
 
 // .ng-star-inserted,
 .pie-label {
-    font-size: large !important;
-    font-weight: normal;
+    font-size: medium !important;
 }
 
+// Maximiser hauteur des graphiques
+html, body {
+    height: 100%;
+    margin: 0;
+}

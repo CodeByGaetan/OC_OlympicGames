@@ -1,6 +1,8 @@
 <header>
-    <h1 class="title">{{ title }}</h1>
-    <div class="statsList">
+    <div class="titleContainer">
+        <h1>{{ title }}</h1>
+    </div>
+    <div class="statsContainer">
         <div class="statItem" *ngFor="let statistic of statistics">
             <h2>{{ statistic.statName }}</h2>
             <h2>{{ statistic.value }}</h2>
