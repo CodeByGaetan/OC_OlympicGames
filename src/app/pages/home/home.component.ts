@@ -20,12 +20,27 @@ export class HomeComponent implements OnInit {
 
   constructor(private olympicService: OlympicService) {}
 
+  // Detect resize on header
+  obs : ResizeObserver = new ResizeObserver(entries => {
+    console.log(entries)
+    // for (let entry of entries) {
+      // const cr = entry.contentRect;
+      this.resizeGraph();
+    // }
+  });
+
   ngOnInit(): void {
+    // Detect resize on header
+    const container = document.getElementById('headerHome');
+    if (container) {
+      this.obs.observe(container);
+    }
+    
     this.title = "Medals per Country";
     this.olympics$ = this.olympicService.getOlympics();
     this.olympics$.pipe(
       tap(stats => {
-
+        console.log("pipe Home : " + stats.length);
         this.statistics = [{
           statName: "Number of JOs",
           value: (stats[0] === undefined ? 0 : stats[0].participations.length)
@@ -34,7 +49,7 @@ export class HomeComponent implements OnInit {
           value: stats.length
         }];
 
-        this.resizeGraph();
+        // this.resizeGraph();
 
       })
     ).subscribe();

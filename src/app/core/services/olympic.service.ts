@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import { catchError, map, switchMap, tap } from 'rxjs/operators';
 import { Olympic } from '../models/olympic.model';
 import { Router } from '@angular/router';
 
@@ -13,21 +13,17 @@ export class OlympicService {
   private olympics$ = new BehaviorSubject<Olympic[]>([]);
 
   constructor(private http: HttpClient,
-    private route : Router) { }
+    private router: Router) { }
 
   loadInitialData(): Observable<Olympic[]> {
-    // this.olympicUrl
     return this.http.get<Olympic[]>(this.olympicUrl).pipe(
       tap((value) => this.olympics$.next(value)),
-      catchError((error, caught) => {
-
-        // TODO: improve error handling
+      catchError((error, _caught) => {
+        // Display error screen if olympics data not found
         console.error(error);
-        // can be useful to end loading state and let the user know something went wrong
-        // this.route.navigateByUrl('/not-found/olympics')
-
+        this.router.navigateByUrl('/not-found/olympics')
         this.olympics$.next([]);
-        return caught;
+        return this.olympics$;
       })
     );
   }
@@ -42,12 +38,18 @@ export class OlympicService {
         const foundItem = items.find(item => item.country === countryName);
         const emptyOlympic: Olympic = {
           id: 0,
-          country: 'Not Found',
+          country: '',
           participations: []
         }
 
-        return foundItem ? foundItem : emptyOlympic;
-      })
+        // Display error screen if country not found
+        if (items.length !== 0 && !foundItem) {
+          this.router.navigateByUrl(`not-found/${countryName}`);
+        }
+        
+        return foundItem ?? emptyOlympic;
+      }),
+
     )
   }
 

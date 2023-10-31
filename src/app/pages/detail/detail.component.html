@@ -4,6 +4,6 @@
         <app-header [title]="title" [statistics]="statistics"></app-header>
     </div>
     <div id="chartContainer">
-        <app-line-chart [olympic$]="olympic$" (window:resize)="onResize()" [view]="view"></app-line-chart>
+        <app-line-chart [olympic$]="olympic$" (window:resize)="resizeGraph()" [view]="view"></app-line-chart>
     </div>
 </div>

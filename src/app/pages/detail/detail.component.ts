@@ -18,16 +18,35 @@ export class DetailComponent implements OnInit {
   statistics!: Statistic[];
   view!: [number,number];
 
+  // Detect resize on header
+  obs : ResizeObserver = new ResizeObserver(entries => {
+    console.log(entries)
+    // for (let entry of entries) {
+      // const cr = entry.contentRect;
+      this.resizeGraph();
+    // }
+  });
+
   constructor(private olympicService: OlympicService,
   private route: ActivatedRoute) {}
 
   ngOnInit(): void {
+    // Detect resize on header
+    const container = document.getElementById('headerDetail');
+    if (container) {
+      this.obs.observe(container);
+    }
+
+    console.log("Init Detail");
     const olympicName : string = this.route.snapshot.params['countryName'];
     this.olympic$ = this.olympicService.getOlympicByName(olympicName);
     this.olympic$.pipe(
       tap(item => {
 
+        // console.log("pipe Detail : " + item.country);
+
         this.title = item.country;
+
         this.statistics = [{
           statName: "Number of entries",
           value: item.participations.length
@@ -39,17 +58,17 @@ export class DetailComponent implements OnInit {
           value: item.participations.reduce((prev,curr) => prev + curr.athleteCount,0)
         }];
 
-        this.onResize();
+        // this.resizeGraph();
   
       })
     ).subscribe();
   }
 
-  onResize() {
+  resizeGraph() {
     const headerHeight = document.getElementById("headerDetail")?.offsetHeight ?? 0
     // const chartWidth = document.getElementById("chartContainer")?.offsetWidth ?? 0
     // const chartHeight = document.getElementById("chartContainer")?.offsetHeight ?? 0
-    console.log("Detail, hauteur du Header : " + headerHeight);
+    // console.log("Detail, hauteur du Header : " + headerHeight);
     this.view = [innerWidth-40,  Math.max(innerHeight-headerHeight-40, 200)];
     // this.view = [chartWidth, chartHeight];
   }
