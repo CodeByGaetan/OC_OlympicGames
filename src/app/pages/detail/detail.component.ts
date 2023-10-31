@@ -12,10 +12,7 @@ import { OlympicService } from 'src/app/core/services/olympic.service';
 })
 export class DetailComponent implements OnInit {
 
-  public olympic$!: Observable<Olympic>;
-
-  // Tester avec : statistics$ pour lier stats au onResize
-  // Probleme : a l'init le graphique n'est pas bien calé
+  olympic$!: Observable<Olympic>;
   
   title!: string;
   statistics!: Statistic[];
@@ -47,9 +44,9 @@ export class DetailComponent implements OnInit {
 
   onResize() {
     const headerHeight = document.getElementById("headerContainer")?.offsetHeight ?? 0
-    const chartWidth = document.getElementById("chartContainer")?.offsetWidth ?? 0
-    const chartHeight = document.getElementById("chartContainer")?.offsetHeight ?? 0
-    console.log(innerHeight);
+    // const chartWidth = document.getElementById("chartContainer")?.offsetWidth ?? 0
+    // const chartHeight = document.getElementById("chartContainer")?.offsetHeight ?? 0
+    console.log(headerHeight);
     this.view = [innerWidth-40, innerHeight-headerHeight-40];
     // this.view = [chartWidth, chartHeight];
   }

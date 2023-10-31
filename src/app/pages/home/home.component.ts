@@ -11,7 +11,7 @@ import { OlympicService } from 'src/app/core/services/olympic.service';
 })
 export class HomeComponent implements OnInit {
   
-  public olympics$!: Observable<Olympic[]>;
+  olympics$!: Observable<Olympic[]>;
   
   title!: string;
   statistics!: Statistic[];
@@ -37,8 +37,8 @@ export class HomeComponent implements OnInit {
   }
 
   onResize() {
-    const header = document.getElementById("headerContainer")?.offsetHeight ?? 0
-    console.log(header);
-    this.view = [innerWidth-40, innerHeight-header-40];
+    const headerHeight = document.getElementById("headerContainer")?.offsetHeight ?? 0
+    console.log(headerHeight);
+    this.view = [innerWidth-40, innerHeight-headerHeight-40];
   }
 }

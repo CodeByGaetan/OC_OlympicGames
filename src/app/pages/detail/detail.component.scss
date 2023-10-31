@@ -1,50 +1,12 @@
 // Bouton retour
 .material-symbols-outlined {
     margin: 10px;
-    // margin: 20px 0 -100px 10px;
-    // margin-bottom: -10px;
     color:lightseagreen;
     font-size: 50px;
     text-decoration: none;
     position:absolute;
-    // left: 0;
-    // top: 0;
-    // z-index: 1;
 }
 
-// // // Maximiser hauteur des graphiques
-// .detailContainer {
-//     display: flex;
-//     flex-flow: column;
-//     height: 100%;
-// }
-
-// // // Maximiser hauteur des graphiques
-// .headerContainer {
-//     flex: 0 1 auto;
-//     // background: #7e8aa0;
-// }
-
-// // Maximiser hauteur des graphiques
 #chartContainer {
-    // flex: 1 1 auto;
-    // display: grid;
     background: aqua;
-    height: 100%;
-    // width:70%;
-    // margin: auto;
-    // display: flex;
-    // justify-content: center;
-
-    // Adaptations Line Chart
-    // width: 85%;
-    // margin: 0 auto 10% auto;
 }
-
-// // Adaptations smartphone
-// @media only screen and (max-width: 500px) {
-//     .chartContainer {
-//         width: 97%;
-//         margin: 0 auto 10% auto;
-//     }
-// }

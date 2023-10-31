@@ -2,7 +2,5 @@
     <div id="headerContainer">
         <app-header [title]="title" [statistics]="statistics"></app-header>
     </div>
-    <div class="chartContainer">
-        <app-pie-chart [olympics$]="olympics$" [view]="view" (window:resize)="onResize()"></app-pie-chart>
-    </div>
+    <app-pie-chart [olympics$]="olympics$" [view]="view" (window:resize)="onResize()"></app-pie-chart>
 </div>

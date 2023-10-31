@@ -13,6 +13,7 @@ export class PieChartComponent implements OnInit {
 
   @Input() olympics$!: Observable<Olympic[]>;
   @Input() view! : [number,number];
+  
   dataSet$!: Observable<DataItem[]>;
 
   constructor(private router: Router) { }

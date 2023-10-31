@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Statistic } from '../../../core/models/statistic.model';
 
 @Component({
@@ -6,14 +6,9 @@ import { Statistic } from '../../../core/models/statistic.model';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
 
   @Input() title!: string;
   @Input() statistics!: Statistic[];
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
 
 }
