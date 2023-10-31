@@ -15,15 +15,17 @@ export class HomeComponent implements OnInit {
   
   title!: string;
   statistics!: Statistic[];
+  
   view!: [number,number];
 
   constructor(private olympicService: OlympicService) {}
 
   ngOnInit(): void {
-    this.olympics$ = this.olympicService.getOlympics();
     this.title = "Medals per Country";
+    this.olympics$ = this.olympicService.getOlympics();
     this.olympics$.pipe(
       tap(stats => {
+
         this.statistics = [{
           statName: "Number of JOs",
           value: (stats[0] === undefined ? 0 : stats[0].participations.length)
@@ -31,14 +33,16 @@ export class HomeComponent implements OnInit {
           statName: "Number of countries",
           value: stats.length
         }];
-        this.onResize()
+
+        this.resizeGraph();
+
       })
     ).subscribe();
   }
 
-  onResize() {
-    const headerHeight = document.getElementById("headerContainer")?.offsetHeight ?? 0
-    console.log(headerHeight);
-    this.view = [innerWidth-40, innerHeight-headerHeight-40];
+  resizeGraph() {
+    const headerHeight = document.getElementById("headerHome")?.offsetHeight ?? 0
+    console.log("Home, hauteur du Header : " + headerHeight);
+    this.view = [innerWidth-40, Math.max(innerHeight-headerHeight-40, 200)];
   }
 }

@@ -19,13 +19,12 @@ export class LineChartComponent implements OnInit {
   ngOnInit(): void {
     this.dataSet$ = this.olympic$.pipe(
       tap(olympicItem => this.xAxisTicks = olympicItem.participations.map(item => item.year)),
-      map(olympicItem => [
-        {
+      map(olympicItem => [{
           name : olympicItem.country,
           series: olympicItem.participations.map(item => ({name:item.year,value:item.medalsCount}))
         }]
       )
-    )
+    );
   }
 
   formatPercent(val:number) {

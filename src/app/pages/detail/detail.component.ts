@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, map, tap } from 'rxjs';
+import { Observable, map, take, tap } from 'rxjs';
 import { Olympic } from 'src/app/core/models/olympic.model';
 import { Statistic } from 'src/app/core/models/statistic.model';
 import { OlympicService } from 'src/app/core/services/olympic.service';
@@ -26,6 +26,7 @@ export class DetailComponent implements OnInit {
     this.olympic$ = this.olympicService.getOlympicByName(olympicName);
     this.olympic$.pipe(
       tap(item => {
+
         this.title = item.country;
         this.statistics = [{
           statName: "Number of entries",
@@ -37,17 +38,19 @@ export class DetailComponent implements OnInit {
           statName: "Total number of athletes",
           value: item.participations.reduce((prev,curr) => prev + curr.athleteCount,0)
         }];
-        this.onResize()
+
+        this.onResize();
+  
       })
     ).subscribe();
   }
 
   onResize() {
-    const headerHeight = document.getElementById("headerContainer")?.offsetHeight ?? 0
+    const headerHeight = document.getElementById("headerDetail")?.offsetHeight ?? 0
     // const chartWidth = document.getElementById("chartContainer")?.offsetWidth ?? 0
     // const chartHeight = document.getElementById("chartContainer")?.offsetHeight ?? 0
-    console.log(headerHeight);
-    this.view = [innerWidth-40, innerHeight-headerHeight-40];
+    console.log("Detail, hauteur du Header : " + headerHeight);
+    this.view = [innerWidth-40,  Math.max(innerHeight-headerHeight-40, 200)];
     // this.view = [chartWidth, chartHeight];
   }
 }

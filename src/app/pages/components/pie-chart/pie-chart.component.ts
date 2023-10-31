@@ -20,13 +20,11 @@ export class PieChartComponent implements OnInit {
   
   ngOnInit(): void {
     this.dataSet$ = this.olympics$.pipe(
-      map(items => items.map<DataItem>(item => {
-        return {
+      map(items => items.map<DataItem>(item => ({
           name: item.country,
           value: item.participations.reduce((prev, curr) => (prev + curr.medalsCount), 0)
-        }
-      })
-      )
+        })
+      ))
     )
   }
 
