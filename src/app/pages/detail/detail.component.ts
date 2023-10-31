@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, tap } from 'rxjs';
+import { Observable, map, tap } from 'rxjs';
 import { Olympic } from 'src/app/core/models/olympic.model';
 import { Statistic } from 'src/app/core/models/statistic.model';
 import { OlympicService } from 'src/app/core/services/olympic.service';
@@ -13,19 +13,23 @@ import { OlympicService } from 'src/app/core/services/olympic.service';
 export class DetailComponent implements OnInit {
 
   public olympic$!: Observable<Olympic>;
+
+  // Tester avec : statistics$ pour lier stats au onResize
+  // Probleme : a l'init le graphique n'est pas bien calé
   
   title!: string;
   statistics!: Statistic[];
+  view!: [number,number];
 
   constructor(private olympicService: OlympicService,
-    private route: ActivatedRoute) {}
+  private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     const olympicName : string = this.route.snapshot.params['countryName'];
     this.olympic$ = this.olympicService.getOlympicByName(olympicName);
     this.olympic$.pipe(
       tap(item => {
-        this.title = item.country
+        this.title = item.country;
         this.statistics = [{
           statName: "Number of entries",
           value: item.participations.length
@@ -36,7 +40,17 @@ export class DetailComponent implements OnInit {
           statName: "Total number of athletes",
           value: item.participations.reduce((prev,curr) => prev + curr.athleteCount,0)
         }];
+        this.onResize()
       })
     ).subscribe();
+  }
+
+  onResize() {
+    const headerHeight = document.getElementById("headerContainer")?.offsetHeight ?? 0
+    const chartWidth = document.getElementById("chartContainer")?.offsetWidth ?? 0
+    const chartHeight = document.getElementById("chartContainer")?.offsetHeight ?? 0
+    console.log(innerHeight);
+    this.view = [innerWidth-40, innerHeight-headerHeight-40];
+    // this.view = [chartWidth, chartHeight];
   }
 }

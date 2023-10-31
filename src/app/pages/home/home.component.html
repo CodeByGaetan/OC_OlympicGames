@@ -1,8 +1,8 @@
 <div class="homeContainer">
-    <div class="headerContainer">
+    <div id="headerContainer">
         <app-header [title]="title" [statistics]="statistics"></app-header>
     </div>
     <div class="chartContainer">
-        <app-pie-chart [olympics$]="olympics$"></app-pie-chart>
+        <app-pie-chart [olympics$]="olympics$" [view]="view" (window:resize)="onResize()"></app-pie-chart>
     </div>
 </div>

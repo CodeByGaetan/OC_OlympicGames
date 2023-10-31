@@ -13,6 +13,7 @@ export class LineChartComponent implements OnInit {
   @Input() olympic$!: Observable<Olympic>;
   dataSet$!: Observable<Series[]>;
   xAxisTicks: number[] = [];
+  @Input() view! : [number,number];
 
   ngOnInit(): void {
     this.dataSet$ = this.olympic$.pipe(

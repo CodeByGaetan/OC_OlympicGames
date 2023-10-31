@@ -15,6 +15,7 @@ export class HomeComponent implements OnInit {
   
   title!: string;
   statistics!: Statistic[];
+  view!: [number,number];
 
   constructor(private olympicService: OlympicService) {}
 
@@ -30,7 +31,14 @@ export class HomeComponent implements OnInit {
           statName: "Number of countries",
           value: stats.length
         }];
+        this.onResize()
       })
     ).subscribe();
+  }
+
+  onResize() {
+    const header = document.getElementById("headerContainer")?.offsetHeight ?? 0
+    console.log(header);
+    this.view = [innerWidth-40, innerHeight-header-40];
   }
 }
