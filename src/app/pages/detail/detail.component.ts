@@ -16,6 +16,7 @@ export class DetailComponent implements OnInit {
   
   title!: string;
   statistics!: Statistic[];
+  
   view!: [number,number];
 
   // Detect resize on header

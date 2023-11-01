@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { Observable, tap } from 'rxjs';
 import { Olympic } from 'src/app/core/models/olympic.model';
 import { Statistic } from 'src/app/core/models/statistic.model';
@@ -9,7 +9,7 @@ import { OlympicService } from 'src/app/core/services/olympic.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, AfterViewInit {
   
   olympics$!: Observable<Olympic[]>;
   
@@ -18,24 +18,9 @@ export class HomeComponent implements OnInit {
   
   view!: [number,number];
 
-  constructor(private olympicService: OlympicService) {}
-
-  // Detect resize on header
-  obs : ResizeObserver = new ResizeObserver(entries => {
-    console.log(entries)
-    // for (let entry of entries) {
-      // const cr = entry.contentRect;
-      this.resizeGraph();
-    // }
-  });
+  constructor(private olympicService: OlympicService, private cd: ChangeDetectorRef) {}
 
   ngOnInit(): void {
-    // Detect resize on header
-    const container = document.getElementById('headerHome');
-    if (container) {
-      this.obs.observe(container);
-    }
-    
     this.title = "Medals per Country";
     this.olympics$ = this.olympicService.getOlympics();
     this.olympics$.pipe(
@@ -48,16 +33,19 @@ export class HomeComponent implements OnInit {
           statName: "Number of countries",
           value: stats.length
         }];
-
-        // this.resizeGraph();
-
       })
     ).subscribe();
   }
 
+  ngAfterViewInit(): void {
+    this.resizeGraph();
+    this.cd.detectChanges();
+  }
+
   resizeGraph() {
     const headerHeight = document.getElementById("headerHome")?.offsetHeight ?? 0
-    console.log("Home, hauteur du Header : " + headerHeight);
+    // console.log("Home, hauteur du Header : " + headerHeight);
     this.view = [innerWidth-40, Math.max(innerHeight-headerHeight-40, 200)];
   }
+
 }

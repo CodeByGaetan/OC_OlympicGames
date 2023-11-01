@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { AfterViewInit, Component, Input } from '@angular/core';
 import { Statistic } from '../../../core/models/statistic.model';
 
 @Component({
