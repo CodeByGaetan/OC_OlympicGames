@@ -1,8 +1,4 @@
-<div id="homeContainer">
-    <div id="headerHome">
-        <app-header id="headerHome2" [title]="title" [statistics]="statistics"></app-header>
-    </div>
-    <div id="chartContainer">
-        <app-pie-chart [olympics$]="olympics$" [view]="view" (window:resize)="resizeGraph()"></app-pie-chart>
-    </div>
+<div id="headerHome">
+    <app-header [title]="title" [statistics]="statistics"></app-header>
 </div>
+<app-pie-chart [olympics$]="olympics$" [view]="view" (window:resize)="resizeGraph()"></app-pie-chart>

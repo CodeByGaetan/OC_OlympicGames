@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { DataItem, LegendPosition } from '@swimlane/ngx-charts';
+import { DataItem } from '@swimlane/ngx-charts';
 import { Observable, map } from 'rxjs';
 import { Olympic } from 'src/app/core/models/olympic.model';
 
@@ -19,17 +19,18 @@ export class PieChartComponent implements OnInit {
   constructor(private router: Router) { }
   
   ngOnInit(): void {
+    // Get chart data from olympics$
     this.dataSet$ = this.olympics$.pipe(
       map(items => items.map<DataItem>(item => ({
           name: item.country,
           value: item.participations.reduce((prev, curr) => (prev + curr.medalsCount), 0)
         })
       ))
-    )
+    );
   }
 
   onSelect(item: DataItem): void {
-    this.router.navigateByUrl(`${item.name}`)
+    this.router.navigateByUrl(`${item.name}`);
   }
 
 }

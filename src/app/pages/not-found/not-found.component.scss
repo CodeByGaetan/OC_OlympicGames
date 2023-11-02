@@ -1,5 +1,5 @@
 .center {
-  width: 100vw;
+  width: calc(100vw - var(--scrollbar-width));
   height: 100vh;
   display: flex;
   justify-content: center;

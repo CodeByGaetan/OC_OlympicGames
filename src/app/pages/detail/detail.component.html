@@ -1,9 +1,5 @@
-<div class="detailContainer">
-    <div id="headerDetail">
-        <a routerLink="" class="material-symbols-outlined">arrow_circle_left</a>
-        <app-header [title]="title" [statistics]="statistics"></app-header>
-    </div>
-    <div id="chartContainer">
-        <app-line-chart [olympic$]="olympic$" (window:resize)="resizeGraph()" [view]="view"></app-line-chart>
-    </div>
+<div id="headerDetail">
+    <a routerLink="" class="material-symbols-outlined">arrow_circle_left</a>
+    <app-header [title]="title" [statistics]="statistics"></app-header>
 </div>
+<app-line-chart [olympic$]="olympic$" [view]="view" (window:resize)="resizeGraph()"></app-line-chart>

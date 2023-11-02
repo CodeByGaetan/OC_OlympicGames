@@ -12,20 +12,22 @@ import { OlympicService } from 'src/app/core/services/olympic.service';
 export class HomeComponent implements OnInit, AfterViewInit {
   
   olympics$!: Observable<Olympic[]>;
-  
   title!: string;
   statistics!: Statistic[];
-  
   view!: [number,number];
 
-  constructor(private olympicService: OlympicService, private cd: ChangeDetectorRef) {}
+  constructor(
+    private olympicService: OlympicService,
+    private changeDetector: ChangeDetectorRef
+  ) {}
 
   ngOnInit(): void {
     this.title = "Medals per Country";
     this.olympics$ = this.olympicService.getOlympics();
+
+    // Get header data from olympics$
     this.olympics$.pipe(
       tap(stats => {
-        console.log("pipe Home : " + stats.length);
         this.statistics = [{
           statName: "Number of JOs",
           value: (stats[0] === undefined ? 0 : stats[0].participations.length)
@@ -37,14 +39,15 @@ export class HomeComponent implements OnInit, AfterViewInit {
     ).subscribe();
   }
 
+  // Size the chart after data loaded
   ngAfterViewInit(): void {
     this.resizeGraph();
-    this.cd.detectChanges();
+    this.changeDetector.detectChanges();
   }
 
-  resizeGraph() {
-    const headerHeight = document.getElementById("headerHome")?.offsetHeight ?? 0
-    // console.log("Home, hauteur du Header : " + headerHeight);
+  // Resize the chart when window size change
+  resizeGraph() : void {
+    const headerHeight = document.getElementById("headerHome")?.offsetHeight ?? 0;
     this.view = [innerWidth-40, Math.max(innerHeight-headerHeight-40, 200)];
   }
 

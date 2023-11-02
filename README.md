@@ -1,29 +1,23 @@
-# OlympicGamesStarter
+# OlympicGamesApp
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.3.
+Check out the results of the last Olympic Games with beautiful charts. Visualize the proportion of medals won by country on a pie chart and 
+display details by country with a line chart of medals won by dates.
 
-Don't forget to install your node_modules before starting (`npm install`).
+This project uses :
+- [Angular CLI](https://github.com/angular/angular-cli) version 14.1.3
+- [ngx-charts](https://github.com/swimlane/ngx-charts) version 20.4.1
+
+# Install 
+
+Install your node_modules before starting (`npm install`).
+On macOS, use the flag `--legacy-peer-deps` if dependency issues occurs.
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`.
+Use `ng serve --host 0.0.0.0` to access the dev server from another device on the same network. Navigate to `http://(HostDeviceIP):4200/`.
+The application will automatically reload if you change any of the source files.
 
 ## Build
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Where to start
-
-As you can see, an architecture has already been defined for the project. It is just a suggestion, you can choose to use your own. The predefined architecture includes (in addition to the default angular architecture) the following:
-
-- `components` folder: contains every reusable components
-- `pages` folder: contains components used for routing
-- `core` folder: contains the business logic (`services` and `models` folders)
-
-I suggest you to start by understanding this starter code. Pay an extra attention to the `app-routing.module.ts` and the `olympic.service.ts`.
-
-Once mastered, you should continue by creating the typescript interfaces inside the `models` folder. As you can see I already created two files corresponding to the data included inside the `olympic.json`. With your interfaces, improve the code by replacing every `any` by the corresponding interface.
-
-You're now ready to implement the requested features.
-
-Good luck!

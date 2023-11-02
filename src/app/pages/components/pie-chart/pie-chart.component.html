@@ -1,13 +1,13 @@
 <ngx-charts-pie-chart
-[view]="view"
-[results]="dataSet$ | async"
-[gradient]="false"
-[legend]="false"
-[labels]="true"
-[doughnut]="false"
-(select)="onSelect($event)"
-[animations]="false"
-[maxLabelLength]="20">
+  [view]="view"
+  [results]="dataSet$ | async"
+  [gradient]="false"
+  [legend]="false"
+  [labels]="true"
+  [doughnut]="false"
+  [animations]="false"
+  [maxLabelLength]="20"
+  (select)="onSelect($event)">
   <ng-template #tooltipTemplate let-model="model">
     <h2>{{model.name}}</h2>
     <h2>🏅{{model.value}}</h2>

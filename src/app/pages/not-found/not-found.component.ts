@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { take } from 'rxjs';
 import { OlympicService } from 'src/app/core/services/olympic.service';
 
@@ -13,13 +13,14 @@ export class NotFoundComponent implements OnInit {
   refresh = false;
   message!: string;
   
-  constructor(private olympicService: OlympicService,
-    private route: ActivatedRoute) { }
+  constructor(
+    private olympicService: OlympicService,
+    private route: ActivatedRoute
+  ) { }
 
 
   ngOnInit(): void {
     const name : string = this.route.snapshot.params['name'];
-
     switch (name) {
       case undefined:
         this.message = "No corresponding page found";
@@ -34,10 +35,9 @@ export class NotFoundComponent implements OnInit {
         this.refresh = false;
         break;
     }
-   
   }
 
-  reload() {
+  reloadData() : void {
     if (this.refresh) {
       this.olympicService.loadInitialData().pipe(take(1)).subscribe();
     }

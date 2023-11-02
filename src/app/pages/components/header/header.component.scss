@@ -2,16 +2,16 @@
     display: flex;
     justify-content: center;
     
-    // Texte
+    // Text
     text-align: center;
 
     h1 {
-        // Texte
+        // Text
         color: white;
         letter-spacing: 2px;
         font-weight: normal;
 
-        // Fond
+        // Background
         background-color: lightseagreen;
         padding: 15px;
         border-radius: 7px;
@@ -26,10 +26,10 @@
     flex-wrap: wrap;
 
     .statItem {
-        // Texte
+        // Text
         text-align: center;
 
-        // Fond
+        // Background
         border: solid lightseagreen;
         padding: 0 10px;
         border-radius: 7px;

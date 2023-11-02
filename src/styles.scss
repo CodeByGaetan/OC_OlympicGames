@@ -1,5 +1,8 @@
 * {
     font-family: Roboto, Helvetica, sans-serif;
+
+    // Disable grey click on smartphone
+    -webkit-tap-highlight-color: transparent;
 }
 
 .pie-label {

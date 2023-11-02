@@ -1,4 +1,4 @@
-  <ngx-charts-line-chart
+<ngx-charts-line-chart
   [view]="view"
   [results]="dataSet$ | async"
   [legend]="false"
@@ -10,7 +10,10 @@
   [yAxisLabel]="'Number of Medals'"
   [timeline]="false"
   [xAxisTicks]="xAxisTicks"
-  [xAxisTickFormatting]="formatPercent"
-  [animations]="false"
-  >
+  [xAxisTickFormatting]="formatAxisX"
+  [animations]="false">
+  <ng-template #tooltipTemplate let-model="model">
+    <p>{{model.series}} : {{model.name}}</p>
+    <p>🏅{{model.value}}</p>
+  </ng-template>
 </ngx-charts-line-chart>

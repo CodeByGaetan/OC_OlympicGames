@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { catchError, map, switchMap, tap } from 'rxjs/operators';
+import { catchError, map, tap } from 'rxjs/operators';
 import { Olympic } from '../models/olympic.model';
 import { Router } from '@angular/router';
 
@@ -9,18 +9,20 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class OlympicService {
+
   private olympicUrl = './assets/mock/olympic.json';
   private olympics$ = new BehaviorSubject<Olympic[]>([]);
 
-  constructor(private http: HttpClient,
-    private router: Router) { }
+  constructor(
+    private http: HttpClient,
+    private router: Router
+  ) { }
 
   loadInitialData(): Observable<Olympic[]> {
     return this.http.get<Olympic[]>(this.olympicUrl).pipe(
       tap((value) => this.olympics$.next(value)),
-      catchError((error, _caught) => {
+      catchError((_error, _caught) => {
         // Display error screen if olympics data not found
-        console.error(error);
         this.router.navigateByUrl('/not-found/olympics')
         this.olympics$.next([]);
         return this.olympics$;
@@ -40,17 +42,14 @@ export class OlympicService {
           id: 0,
           country: '',
           participations: []
-        }
-
+        };
         // Display error screen if country not found
         if (items.length !== 0 && !foundItem) {
           this.router.navigateByUrl(`not-found/${countryName}`);
         }
-        
         return foundItem ?? emptyOlympic;
-      }),
-
-    )
+      })
+    );
   }
 
 }
