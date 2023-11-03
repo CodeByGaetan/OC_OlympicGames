@@ -10,7 +10,7 @@ This project uses :
 # Install 
 
 Install your node_modules before starting (`npm install`).
-On macOS, use the flag `--legacy-peer-deps` if dependency issues occurs.
+On macOS, use the command `npm install --legacy-peer-deps` in case of dependency problems.
 
 ## Development server
 
