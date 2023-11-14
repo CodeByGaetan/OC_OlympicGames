@@ -24,7 +24,7 @@ export class OlympicService {
       catchError((_error, _caught) => {
         // Display error screen if olympics data not found
         this.router.navigateByUrl('/not-found/olympics')
-        this.olympics$.next([]);
+        this.olympics$.next([]);       
         return this.olympics$;
       })
     );
